@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 import styled from '@emotion/styled'
-import {Colors} from "./styles/generalStyles"
+import {Colors} from "../styles/generalStyles"
 
 export default function Layout({children}: { children: ReactNode }): ReactJSXElement {
     return (

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import {IArticle, IUser} from "./types/generalTypes";
 import {getUsernameById} from "./functions/getUserNameById";
-import {Colors} from "./styles/generalStyles";
+import {Colors} from "../styles/generalStyles";
 
 interface IProps {
     article: IArticle;

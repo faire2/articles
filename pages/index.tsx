@@ -4,14 +4,15 @@ import {IArticle, IUser} from "../components/types/generalTypes";
 import Layout from "../components/Layout";
 import {Article} from "../components/Article";
 import {PropagateLoader} from "react-spinners";
-import {Colors} from "../components/styles/generalStyles";
+import {Colors} from "../styles/generalStyles";
 import styled from "@emotion/styled";
+import {ErrorMsgBox} from "../components/ErrorMsgBox";
 
 export default function Home() {
     const [articles, setArticles] = useState<IArticle[]>([]);
     const [users, setUsers] = useState<IUser[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [errorMsg, setErrorMsg] = useState<string>(""); // todo implement
+    const [errorMsg, setErrorMsg] = useState<string>("");
 
     useEffect(() => {
         console.log("load articles and users");
@@ -49,6 +50,7 @@ export default function Home() {
               articles.length !== 0 && articles.map((article, i) =>
               <Article article={article} users={users} key={i}/>
           )}
+          {errorMsg.length > 0 && <ErrorMsgBox  message={"Unable to load resources: " + errorMsg } />}
       </Layout>
   )
 }
