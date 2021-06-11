@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {ApiLocations, fetchData} from "../components/functions/fetchData";
 import {IArticle, IUser} from "../components/types/generalTypes";
-import {getUsernameById} from "../components/functions/getUserNameById";
 import Layout from "../components/Layout";
+import {Article} from "../components/Article";
 
 export default function Home() {
     const [articles, setArticles] = useState<IArticle[]>([]);
@@ -45,19 +45,8 @@ export default function Home() {
       <Layout>
           {articles.length !== 0 &&
           articles.map((article, i) =>
-              <div key={i}>
-                  <h1>
-                      {article.title}
-                  </h1>
-                  <div>
-                      {article.body}
-                  </div>
-                  <div>
-                      {getUsernameById(article.userId, users)}
-                  </div>
-              </div>
-          )
-          }
+              <Article article={article} users={users} key={i}/>
+          )}
       </Layout>
   )
 }

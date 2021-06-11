@@ -6,10 +6,10 @@ import {Colors} from "./styles/generalStyles"
 export default function Layout({children}: { children: ReactNode }): ReactJSXElement {
     return (
         <Container>
+            <Header>
+                Articles Site
+            </Header>
             <InnerContainer>
-                <Header>
-                    Articles Site
-                </Header>
                 {children}
             </InnerContainer>
         </Container>
@@ -30,11 +30,13 @@ const InnerContainer = styled.div`
 `;
 
 const Header = styled.div`
+  border-radius: 0 0 25px 25px;
   position: sticky;
-  background-color: ${Colors.Orange};
+  background-color: ${Colors.Yellow};
   padding: 2%;
   font-size: 3rem;
   color: white;
   text-shadow: 2px 2px 4px ${Colors.Yellow};
   top: 0;
+  z-index: 1;
 `;
