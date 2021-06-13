@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
-import {Colors} from "../styles/generalStyles";
+import {Colors} from "../common/styles/generalStyles";
 
 interface IProps {
     message: string
@@ -10,7 +10,7 @@ interface IProps {
 export const ErrorMsgBox = ({message}: IProps): ReactJSXElement =>
     <Container>
         {message}
-    </Container>
+    </Container>;
 
 const Container = styled.div`
   padding: 2%;
@@ -20,4 +20,4 @@ const Container = styled.div`
   color: white;
   border-radius: 10px;
   cursor: default;
-`
+`;

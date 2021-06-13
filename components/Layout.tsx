@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 import styled from '@emotion/styled'
-import {Colors} from "../styles/generalStyles"
+import {Colors} from "../common/styles/generalStyles"
 
 export default function Layout({children}: { children: ReactNode }): ReactJSXElement {
     return (
@@ -34,6 +34,7 @@ const Header = styled.div`
   position: sticky;
   background-color: ${Colors.Yellow};
   padding: 2%;
+  margin-top: -1.5%;
   font-size: 3rem;
   color: white;
   text-shadow: 2px 2px 4px ${Colors.Yellow};

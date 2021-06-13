@@ -5,11 +5,19 @@ export interface IArticle {
     userId: number
 }
 
-// only type relevant properties
+// only relevant properties
 export interface IUser {
     id: number;
     name: string;
     username: string;
     website: string;
     email: string;
+}
+
+export interface IComment {
+    id: number;
+    postId: number;
+    name: string;
+    email: string;
+    body: string;
 }

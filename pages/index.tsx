@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from "react"
-import {ApiLocations, fetchData} from "../components/functions/fetchData";
-import {IArticle, IUser} from "../components/types/generalTypes";
+import {ApiLocations, fetchData} from "../functions/fetchData";
+import {IArticle, IUser} from "../common/types/generalTypes";
 import Layout from "../components/Layout";
 import {Article} from "../components/Article";
 import {PropagateLoader} from "react-spinners";
-import {Colors} from "../styles/generalStyles";
+import {Colors} from "../common/styles/generalStyles";
 import styled from "@emotion/styled";
 import {ErrorMsgBox} from "../components/ErrorMsgBox";
+import {saveData} from "../functions/sessionStorageFunctions";
+import {StorageLocations} from "../common/storageLocations";
 
 export default function Home() {
     const [articles, setArticles] = useState<IArticle[]>([]);
@@ -17,10 +19,14 @@ export default function Home() {
     useEffect(() => {
         console.log("load articles and users");
         setIsLoading(true);
-        fetchData(ApiLocations.Posts)
+        fetchData(ApiLocations.Articles)
             .then((data) => {
                 setArticles(data as IArticle[]);
-                users.length > 0 && setIsLoading(false);
+                saveData(StorageLocations.Articles, data)
+                    .catch((e: Error) => {
+                        console.error("Unable to save articles to session storage");
+                        console.error(e);
+                    });
             })
             .catch((e: Error) => {
                     setErrorMsg(e.message);
@@ -29,6 +35,11 @@ export default function Home() {
         fetchData(ApiLocations.Users)
             .then((data) => {
                 setUsers(data as IUser[]);
+                saveData(StorageLocations.Users, data)
+                    .catch((e: Error) => {
+                        console.error("Unable to save articles to session storage");
+                        console.error(e)
+                    });
             })
             .catch((e: Error) => {
                     setErrorMsg(e.message);
@@ -59,4 +70,4 @@ const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 100px;
-`
+`;
