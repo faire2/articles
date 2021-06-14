@@ -1,21 +1,33 @@
 import React from "react";
-import styled from "@emotion/styled"
 import {IComment} from "../common/types/generalTypes";
-import {AuthorNameTag} from "../common/styles/generalStyles";
+import {Colors} from "../common/styles/generalStyles";
+import styled from "@emotion/styled";
 
 interface IProps {
-    comment: IComment
+    comment: IComment;
 }
 
-export const comment = ({ comment }: IProps) =>
+export const Comment = ({comment}: IProps) =>
     <Container>
-        {comment.body}
-        <AuthorNameTag>
-            {comment.name}
-        </AuthorNameTag>
+        {comment.name} (<Email>{comment.email}</Email>)
+        <br/>
+        <CommentBody>
+            {comment.body}
+        </CommentBody>
     </Container>;
 
 const Container = styled.div`
-    display: flex;
-    flex-flow: column;
+    margin-left: 5%;
+    margin-top: 2%;
+    background-color: white;
+    position: relative;  
+    cursor: default;
+`;
+
+const Email = styled.span`
+    color: ${Colors.Orange};
+`;
+
+const CommentBody = styled.div`
+    margin-left: 2%;
 `;

@@ -8,16 +8,22 @@ import {StorageLocations} from "../common/storageLocations";
 import {ErrorMsgBox} from "../components/ErrorMsgBox";
 import Layout from "../components/Layout";
 import {getArticleById} from "../functions/getArticleById";
+import {Comment} from "../components/Comment";
+import {PulseLoader} from "react-spinners";
+import {Colors} from "../common/styles/generalStyles";
+import styled from "@emotion/styled";
 
 export default function ArticleDetail() {
     const [article, setArticle] = useState<IArticle | null>(null);
     const [comments, setComments] = useState<IComment[]>([]);
     const [users, setUsers] = useState<IUser[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<string>("");
 
     const router = useRouter();
     const articleId = parseInt(router.query.articleId as string);
+
+    const usersArticlesLoaded = article && users.length > 0;
+    const commentsUsersArticlesLoaded = article && users.length > 0 && comments.length > 0;
 
     // load previously saved article to shorten the time for loading
     useEffect(() => {
@@ -75,17 +81,15 @@ export default function ArticleDetail() {
             );
     }, []);
 
-// load comments
+// load comments - normally we would again load and display only part and then go by demand
     useEffect(() => {
         fetchData(ApiLocations.Comments)
             .then((data) => {
                 setComments((data as IComment[]));
-                setIsLoading(false);
                 console.log("Comments loaded from API.");
             })
             .catch((e: Error) => {
                     setErrorMsg(e.message);
-                    setIsLoading(false);
                 }
             );
     }, []);
@@ -93,8 +97,19 @@ export default function ArticleDetail() {
 
     return (
         <Layout>
-            {article && users.length > 0 && <Article article={article} users={users}/>}
+            {usersArticlesLoaded && <Article article={article!} users={users}/>}
             {errorMsg.length > 0 && <ErrorMsgBox message={"Unable to load resources: " + errorMsg}/>}
+            {commentsUsersArticlesLoaded ?
+                comments.map((comment, i) => <Comment comment={comment} key={i} />)
+                : <SpinnerContainer><PulseLoader color={Colors.Orange}/></SpinnerContainer>
+            }
         </Layout>
     )
 };
+
+const SpinnerContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-top: 5%;
+`;

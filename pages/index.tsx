@@ -51,7 +51,9 @@ export default function Home() {
         isLoading && users.length + articles.length > 0 && setIsLoading(false);
     }, [articles, users]);
 
-  return (
+    // normally we would only show certain amount of articles and load the rest on scrolling (e.g. with pagination -
+    // https://github.com/faire2/movie-api/blob/master/src/components/carousel/Carousel.js )
+    return (
       <Layout>
           {isLoading ?
               <SpinnerContainer>
