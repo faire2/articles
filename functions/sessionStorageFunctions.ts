@@ -29,7 +29,7 @@ export async function loadData(key: string, destringify: boolean) {
     }
 }
 
-function _shouldBeStringidiedForStorage(value: any) {
+function _shouldBeStringidiedForStorage(value: any): boolean | null {
     // only selected non-strings must be stringified
     if (typeof value !== "string") {
         switch (typeof value) {

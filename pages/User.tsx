@@ -80,7 +80,7 @@ export default function User() {
                 <Headline>User Information</Headline>
                 {user &&
                 <UserInformation>
-                    <UserInfoPair valueKey={"Name"} value={user.name}/>
+                    <UserInfoPair valueKey="Name" value={user.name}/>
                     <UserInfoPair valueKey="Username" value={user.username}/>
                     <UserInfoPair valueKey="Email" value={user.email}/>
                     <UserInfoPair valueKey="Website" value={user.website}/>

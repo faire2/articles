@@ -17,7 +17,6 @@ export default function Home() {
     const [errorMsg, setErrorMsg] = useState<string>("");
 
     useEffect(() => {
-        console.log("load articles and users");
         setIsLoading(true);
         fetchData(ApiLocations.Articles)
             .then((data) => {
@@ -59,8 +58,7 @@ export default function Home() {
               <SpinnerContainer>
                   <PropagateLoader color={Colors.Orange} size={30}/>
               </SpinnerContainer>
-              :
-              articles.length !== 0 && articles.map((article, i) =>
+              : articles.length !== 0 && articles.map((article, i) =>
               <Article article={article} users={users} key={i}/>
           )}
           {errorMsg.length > 0 && <ErrorMsgBox  message={"Unable to load resources: " + errorMsg } />}

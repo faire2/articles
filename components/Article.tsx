@@ -1,16 +1,17 @@
-import * as React from "react";
+import React from "react";
 import styled from "@emotion/styled";
+import Link from "next/link";
 import {IArticle, IUser} from "../common/types/generalTypes";
 import {getNameById} from "../functions/getNameById";
 import {AuthorNameTag, Colors, LinkNoDecor} from "../common/styles/generalStyles";
-import Link from "next/link";
+import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 
 interface IProps {
     article: IArticle;
     users: IUser[];
 }
 
-export const Article = ({article, users}: IProps) =>
+export const Article = ({article, users}: IProps): ReactJSXElement =>
     <Container>
         <Link
             href={{

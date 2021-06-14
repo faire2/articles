@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
 import React from "react";
 import {Colors} from "../common/styles/generalStyles";
+import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 
 interface IProps {
     valueKey: string;
     value: string
 }
 
-export const UserInfoPair = ({valueKey, value}: IProps) =>
+export const UserInfoPair = ({valueKey, value}: IProps): ReactJSXElement =>
     <Container>
         <Key>{valueKey}:</Key> {value}
     </Container>;

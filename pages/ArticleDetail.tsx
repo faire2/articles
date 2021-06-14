@@ -22,12 +22,12 @@ export default function ArticleDetail() {
     const router = useRouter();
     const articleId = parseInt(router.query.articleId as string);
 
-    const usersArticlesLoaded = article && users.length > 0;
+    const usersArticleLoaded = article && users.length > 0;
     const commentsUsersArticlesLoaded = article && users.length > 0 && comments.length > 0;
 
     // load previously saved article to shorten the time for loading
     useEffect(() => {
-        if (router.query) {
+        if (router.query.articleId) {
             loadData(StorageLocations.Articles, true)
                 .then((articles: IArticle[]) => {
                     const tArticle = getArticleById(articleId, articles);
@@ -50,7 +50,7 @@ export default function ArticleDetail() {
 // load articles from API to check for a possible recent change
 // normally we would only bring relevant article, but we have no API to fetch comments by id
     useEffect(() => {
-        if (router.query) {
+        if (router.query.articleId) {
             fetchData(ApiLocations.Articles)
                 .then((data) => {
                     const tArticle = getArticleById(articleId, data as IArticle[]);
@@ -70,7 +70,7 @@ export default function ArticleDetail() {
     useEffect(() => {
         fetchData(ApiLocations.Users)
             .then((data) => {
-                setUsers(data as IUser[]);
+                users.length === 0 && setUsers(data as IUser[]);
                 console.log("Users loaded from API");
             })
             .catch((e: Error) => {
@@ -95,7 +95,7 @@ export default function ArticleDetail() {
 
     return (
         <Layout>
-            {usersArticlesLoaded && <Article article={article!} users={users}/>}
+            {usersArticleLoaded && <Article article={article!} users={users}/>}
             {commentsUsersArticlesLoaded ?
                 comments.map((comment, i) => <Comment comment={comment} key={i} />)
                 : <SpinnerContainer><PulseLoader color={Colors.Orange}/></SpinnerContainer>

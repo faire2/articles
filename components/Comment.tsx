@@ -2,12 +2,13 @@ import React from "react";
 import {IComment} from "../common/types/generalTypes";
 import {Colors} from "../common/styles/generalStyles";
 import styled from "@emotion/styled";
+import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 
 interface IProps {
     comment: IComment;
 }
 
-export const Comment = ({comment}: IProps) =>
+export const Comment = ({comment}: IProps): ReactJSXElement =>
     <Container>
         <b>{comment.name}</b> (<Email>{comment.email}</Email>)
         <br/>
@@ -24,7 +25,7 @@ const Container = styled.div`
     cursor: default;
     font-size: 0.9rem; 
     @media (max-width: 400px) {
-    font-size: 0.8rem;
+      font-size: 0.8rem;
     }
 `;
 
