@@ -76,7 +76,6 @@ export default function User() {
 
     return (
         <Layout>
-            <Container>
                 <Headline>User Information</Headline>
                 {user &&
                 <UserInformation>
@@ -86,7 +85,6 @@ export default function User() {
                     <UserInfoPair valueKey="Website" value={user.website}/>
                 </UserInformation>}
                 {user && articles.length > 0  && <Headline>Articles written by {user!.name}</Headline>}
-            </Container>
             {articles.length > 0 && articles.map((article, i) =>
                 <Article article={article} users={[user!]} key={i}/>)}
             {errorMsg.length > 0 && <ErrorMsgBox message={"Unable to load resources: " + errorMsg}/>}
@@ -96,6 +94,7 @@ export default function User() {
 
 const Container = styled.div`
     padding: 3%;
+    background-color: aqua;
 `;
 
 

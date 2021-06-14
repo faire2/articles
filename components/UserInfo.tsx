@@ -10,14 +10,19 @@ interface IProps {
 
 export const UserInfoPair = ({valueKey, value}: IProps): ReactJSXElement =>
     <Container>
-        <Key>{valueKey}:</Key> {value}
+        <Inner>
+            <Key>{valueKey}:</Key> {value}
+        </Inner>
     </Container>;
 
 const Container = styled.div`
+    flex-flow: row;  
+    padding-top: 2%;
+`;
+
+const Inner = styled.div`
     display: flex;
     flex-flow: row;  
-    width: 400px;
-    padding-top: 2%;
 `;
 
 const Key = styled.span`
