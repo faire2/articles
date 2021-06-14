@@ -9,7 +9,7 @@ interface IProps {
 
 export const Comment = ({comment}: IProps) =>
     <Container>
-        {comment.name} (<Email>{comment.email}</Email>)
+        <b>{comment.name}</b> (<Email>{comment.email}</Email>)
         <br/>
         <CommentBody>
             {comment.body}
@@ -22,6 +22,10 @@ const Container = styled.div`
     background-color: white;
     position: relative;  
     cursor: default;
+    font-size: 0.9rem; 
+    @media (max-width: 400px) {
+    font-size: 0.8rem;
+    }
 `;
 
 const Email = styled.span`

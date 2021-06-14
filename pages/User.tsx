@@ -42,10 +42,12 @@ export default function User() {
 
             loadData(StorageLocations.Articles, true)
                 .then((articles: IArticle[]) => {
-                    const tArticles = articles.filter((article: IArticle) =>
-                        article.userId === userId);
-                    setArticles(tArticles);
-                    console.log("Articles loaded from session storage");
+                    if (articles) {
+                        const tArticles = articles.filter((article: IArticle) =>
+                            article.userId === userId);
+                        setArticles(tArticles);
+                        console.log("Articles loaded from session storage");
+                    }
                 })
                 .catch((e: Error) => {
                     setErrorMsg(e.message);
@@ -76,13 +78,14 @@ export default function User() {
         <Layout>
             <Container>
                 <Headline>User Information</Headline>
-                {user && <UserInformation>
+                {user &&
+                <UserInformation>
                     <UserInfoPair valueKey={"Name"} value={user.name}/>
                     <UserInfoPair valueKey="Username" value={user.username}/>
                     <UserInfoPair valueKey="Email" value={user.email}/>
                     <UserInfoPair valueKey="Website" value={user.website}/>
                 </UserInformation>}
-                <Headline>Articles written by {user!.name}</Headline>
+                {user && articles.length > 0  && <Headline>Articles written by {user!.name}</Headline>}
             </Container>
             {articles.length > 0 && articles.map((article, i) =>
                 <Article article={article} users={[user!]} key={i}/>)}
@@ -92,7 +95,7 @@ export default function User() {
 };
 
 const Container = styled.div`
-    margin-left: 3%;
+    padding: 3%;
 `;
 
 
@@ -105,4 +108,8 @@ const Headline = styled.div`
     font-size: 1.5rem;
     color: ${Colors.Orange};
     margin-top: 3%;
+    @media (max-width: 400px) {
+      font-size: 1.3rem;
+      margin-top: 5%;
+    }
 `;

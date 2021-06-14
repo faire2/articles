@@ -25,5 +25,15 @@ export const AuthorNameTag = styled.div`
         right: -0%;
         border-radius: 40px;
         background-color: ${Colors.LighterBlue} ;
-  }
+        
+    }
+    @media (max-width: 400px) {
+      font-size: 0.8rem;
+    }
+`;
+
+export const LinkNoDecor = styled.div`
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
 `;

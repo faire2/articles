@@ -1,14 +1,22 @@
 import React, {ReactNode} from "react";
 import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 import styled from '@emotion/styled'
-import {Colors} from "../common/styles/generalStyles"
+import {Colors, LinkNoDecor} from "../common/styles/generalStyles"
+import Link from "next/link";
 
+// drag would have to be implemented instead of hover for touch screens
 export default function Layout({children}: { children: ReactNode }): ReactJSXElement {
     return (
         <Container>
             <Header>
             <Links>links - settings - logout</Links>
-                Articles Site
+                <Link
+                    href={{
+                        pathname: "/",
+                    }}
+                >
+                    <LinkNoDecor>Articles Site </LinkNoDecor>
+                </Link>
             </Header>
             <InnerContainer>
                 {children}
@@ -28,7 +36,10 @@ const Container = styled.div`
 ;
 
 const InnerContainer = styled.div`
-  max-width: 1000px;
+  max-width: 800px;
+  @media (max-width: 400px) {
+    max-width: 350px;
+  }
 `;
 
 const Header = styled.div`
@@ -50,6 +61,11 @@ const Header = styled.div`
   cursor: default;
   &:hover {
     margin-top: -10px;
+  }
+  @media (max-width: 400px) {
+    font-size: 2rem;
+    height: 60px;
+    margin-top: -5px;
   }
 `;
 
