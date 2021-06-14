@@ -21,7 +21,7 @@ export const AuthorNameTag = styled.div`
     transition: all 0.3s ease-in-out;
     &:hover {
         padding: 1.5% 3%;
-        bottom: 2%;
+        bottom: 1%;
         right: -0%;
         border-radius: 40px;
         background-color: ${Colors.LighterBlue} ;

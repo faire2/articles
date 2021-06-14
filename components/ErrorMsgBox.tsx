@@ -14,7 +14,7 @@ export const ErrorMsgBox = ({message}: IProps): ReactJSXElement =>
 
 const Container = styled.div`
   padding: 2%;
-  margin: 0 6%;
+  margin: 10% 6%;
   background-color: ${Colors.Red};
   text-align: center;
   color: white;

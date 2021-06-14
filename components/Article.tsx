@@ -14,7 +14,7 @@ export const Article = ({article, users}: IProps) =>
     <Container>
         <Link
             href={{
-                pathname: '/ArticleDetail',
+                pathname: "/ArticleDetail",
                 query: {articleId: article.id},
             }}
         >
@@ -29,7 +29,16 @@ export const Article = ({article, users}: IProps) =>
             </div>
         </Link>
         <AuthorNameTag>
-            {getNameById(article.userId, users)}
+            <Link
+                href={{
+                    pathname: "/User",
+                    query: {userId: article.userId},
+                }}
+            >
+                <User>
+                    {getNameById(article.userId, users)}
+                </User>
+            </Link>
         </AuthorNameTag>
     </Container>;
 
@@ -42,18 +51,26 @@ const Container = styled.div`
 `;
 
 const Headline = styled.div`
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     color: ${Colors.Orange};
-    padding: 2% 2% 0 2%;
+    padding: 2% 2% 0 1%;
     width: 100%;
 `;
 
 const Text = styled.p`
-    padding: 0 1.5%;
+    padding: 0 2%;
     text-align: justify;
 `;
 
 const Line = styled.hr`
     margin: 1% 2%;
     color: rgba(255,255,89,0.21); 
+`;
+
+const User = styled.div`
+    color: white;
+    text-decoration: none;
+    &:visited{
+      color: white;
+    }
 `;

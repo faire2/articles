@@ -28,7 +28,6 @@ export default function ArticleDetail() {
     // load previously saved article to shorten the time for loading
     useEffect(() => {
         if (router.query) {
-            console.log("Detail for article id: " + articleId);
             loadData(StorageLocations.Articles, true)
                 .then((articles: IArticle[]) => {
                     const tArticle = getArticleById(articleId, articles);
@@ -54,7 +53,6 @@ export default function ArticleDetail() {
         if (router.query) {
             fetchData(ApiLocations.Articles)
                 .then((data) => {
-                    console.log(data);
                     const tArticle = getArticleById(articleId, data as IArticle[]);
                     if (tArticle) {
                         setArticle(tArticle);
@@ -98,11 +96,11 @@ export default function ArticleDetail() {
     return (
         <Layout>
             {usersArticlesLoaded && <Article article={article!} users={users}/>}
-            {errorMsg.length > 0 && <ErrorMsgBox message={"Unable to load resources: " + errorMsg}/>}
             {commentsUsersArticlesLoaded ?
                 comments.map((comment, i) => <Comment comment={comment} key={i} />)
                 : <SpinnerContainer><PulseLoader color={Colors.Orange}/></SpinnerContainer>
             }
+            {errorMsg.length > 0 && <ErrorMsgBox message={"Unable to load resources: " + errorMsg} />}
         </Layout>
     )
 };
